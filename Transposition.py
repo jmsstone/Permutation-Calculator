@@ -1,3 +1,9 @@
+'''
+Author: James Stone
+Date: 10/15/2026
+Purpose:    The purpose of this file is to create a subclass of permutations that represents
+            a transposition.
+'''
 from permutation import Permutation
 
 class Transposition(Permutation):

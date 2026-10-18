@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Mapping
 from itertools import permutations
 import math
+from transposition import Transposition
 
 class Permutation:
 
