@@ -2,7 +2,14 @@ from __future__ import annotations
 from typing import Mapping
 from itertools import permutations
 import math
-from transposition import Transposition
+'''
+Author: James Stone
+Date: 10/19/2026
+Purpose:    The purpose of this file is to create a Permutation class that implements
+            the math behind permutations in a group theoretic sense. That is, that a 
+            permutation is some bijection from one set to itself. In this file it uses
+            index-based permuting and only works on sets of numbers so far.
+'''
 
 class Permutation:
 
@@ -117,61 +124,3 @@ class Identity(Permutation):
         return hash("IDENTITY")
 
 IDENTITY = Identity() 
-
-def generateTranspositions(n: int) -> list:
-    listOfProducts = []
-
-    for i in range(1,n+1):
-        for j in range(i+1,n+1):
-            listOfProducts.append(Transposition(i,j))
-    return listOfProducts
-
-def printProducts(products: list):
-    for transposition in products:
-        print(str(transposition))
-    return
-
-def multiply_permutations(perms: list[Permutation] | tuple[Permutation, ...]) -> Permutation:
-    """
-    Recursively computes the product of an ordered list of permutations.
-    [p1, p2, p3] evaluates to p1 * p2 * p3.
-    """
-    # Base Case 1: Empty sequence yields the identity element
-    if not perms:
-        return IDENTITY
-
-    # Base Case 2: Single permutation yields itself
-    if len(perms) == 1:
-        return perms[0]
-
-    # Recursive Step: Multiply head by product of tail
-    return perms[0] * multiply_permutations(perms[1:])
-
-def setOfProducts(perms: list[Permutation]):
-    products = set()
-    for permutation_set in permutations(perms):
-        products.add(multiply_permutations(permutation_set))
-    return products
-
-def setOfProductsDP(perms: list[Permutation]) -> set[Permutation]:
-    """Computes the set of products using Bitmask DP in O(2^m) steps."""
-    m = len(perms)
-    # dp[mask] maps a bitmask subset of used transpositions to reachable permutations
-    dp: dict[int, set[Permutation]] = {0: {IDENTITY}}
-
-    for mask in range(1 << m):
-        if mask not in dp:
-            continue
-        current_perms = dp[mask]
-
-        for i, t in enumerate(perms):
-            if not (mask & (1 << i)):
-                next_mask = mask | (1 << i)
-                if next_mask not in dp:
-                    dp[next_mask] = set()
-                # Accumulate reachable permutations
-                for p in current_perms:
-                    dp[next_mask].add(p * t)
-
-    full_mask = (1 << m) - 1
-    return dp[full_mask]
