@@ -1,6 +1,4 @@
-from permutation import Permutation
-from permutation import IDENTITY
-from transposition import Transposition
+from permutation_calculator import Permutation, Transposition, IDENTITY
 from itertools import permutations
 
 '''
@@ -10,6 +8,7 @@ from itertools import permutations
     Notes:  Since we store transpositions in cycle notation (1 2) and (2 1) are equivalent, thus we
             only need to go one direction in our for loops.
 '''
+
 def generateTranspositions(n: int) -> list:
     listOfProducts = []
 
