@@ -36,8 +36,7 @@ class Permutation:
                 visited.add(curr)
                 cycle.append(curr)
                 curr = self(curr)
-            if len(cycle) > 1:
-                cycles.append(cycle) # only add a cycle if its not a fixed element.
+            cycles.append(cycle) # only add a cycle if its not a fixed element.
         return cycles
 
     def __eq__(self, other: object) -> bool:
