@@ -9,3 +9,9 @@ description = "A group theory permutation calculator"
 dependencies = [
     "pytest>=8.0.0",
 ]
+
+[tool.coverage.run]
+omit = [
+    "example.py",
+    "tests/*",
+]
