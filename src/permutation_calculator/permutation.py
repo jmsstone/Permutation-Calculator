@@ -92,7 +92,7 @@ class Permutation:
         return repr(self)
 
     def inverse(self) -> Permutation:
-        inv = Permutation({v: k for k,v in (self.mapping or {}).items() if k != v})
+        inv = Permutation({v: k for k, v in self.mapping.items()})
         return inv
 
 
