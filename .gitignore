@@ -10,3 +10,5 @@ build/
 
 # Pytest cache
 .pytest_cache/
+.coverage
+coverage.xml
