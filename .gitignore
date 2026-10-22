@@ -12,3 +12,6 @@ build/
 .pytest_cache/
 .coverage
 coverage.xml
+
+# VScode config artifacts
+/.vscode
